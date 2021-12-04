@@ -1,0 +1,7 @@
+*
+# zsh config & oh_my_zsh
+!.oh-my-zsh/custom/themes/njczh-custom.zsh-theme
+!.zshrc
+# git 
+!.gitconfig
+!.gitignore
