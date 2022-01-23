@@ -19,7 +19,7 @@ function login_info() {
     local ip
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         # Linux
-        ip="$(ifconfig | grep -E '^eno1|^eth1|^bond' -A 1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -1)";
+        ip="$(ifconfig | grep -E '^eno1|^eth1|^bond|^em1' -A 1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -1)";
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         # macOS
         ip="$(ifconfig | grep ^en1 -A 4 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -1)";
