@@ -1,11 +1,6 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-export CUDA_HOME=/usr/local/cuda
-#export CUDA_HOME=/usr/local/cuda11.3
-#export CUDA_HOME=/usr/local/cuda10.1
-export PATH=$PATH:$CUDA_HOME/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64
+###############################################################################
+#                          OH MY ZSH CONFIGURATION                            #
+###############################################################################
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -77,25 +72,43 @@ HIST_STAMPS="%y/%m/%d %T"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    zsh-256color            # 使 auto suggestion 半透明
     colored-man-pages
     command-not-found
     cp
     extract
     git
     sudo
-    zsh-autosuggestions 
+    safe-paste
+    zsh-autosuggestions
     zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+
+
+###############################################################################
+#                           USER CONFIGURATION                                #
+###############################################################################
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/.local/bin
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# CUDA CONFIGURATION
+#
+#export CUDA_HOME=/usr/local/cuda
+#export CUDA_HOME=/usr/local/cuda-11.3 
+export CUDA_HOME=/usr/local/cuda-10.0
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64
+export PATH=$PATH:$CUDA_HOME/bin
+
 # You may need to manually set your language environment
 #export LANG=en_US.UTF-8
-export LANG=zh_CN.UTF-8
+#export LANG=zh_CN.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -104,7 +117,7 @@ export LANG=zh_CN.UTF-8
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
+# COMPILATION FLAGS
 # export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -112,24 +125,25 @@ export LANG=zh_CN.UTF-8
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
+# EXAMPLE ALIASES
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export TERM=xterm-256color  # 使autosuggestions半透明
-
+#
 export hostip=10.177.45.171
 alias setss='export https_proxy="http://${hostip}:7890";export http_proxy="http://${hostip}:7890";export all_proxy="socks5://${hostip}:7890";'
 alias unsetss='unset all_proxy; unset http_proxy; unset https_proxy;'
 alias myip="curl myip.ipip.net"
-
+#
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
+alias ll='ls -alhF'
+alias la='ls -Ah'
+alias l='ls -hCF'
+#
+alias cp='/usr/local/bin/advcp -g'
+alias mv='/usr/local/bin/advmv -g'
+#
 alias cls='clear'
-
+#
 alias grep="grep --color=auto"
 alias -s html='vim'             # 在命令行直接输入后缀为 html 的文件名，会在 Vim 中打开
 alias -s rb='vim'               # 在命令行直接输入 ruby 文件，会在 Vim 中打开
@@ -141,6 +155,24 @@ alias -s gz='tar -xzvf'         # 在命令行直接输入后缀为 gz 的文件
 alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
+
+# 如果终端支持truecolor, 用之
+case $TERM in
+    # export TERM="xterm-256color" # Enable 256 color to make auto-suggestions look nice?
+    # 别在zsh里改TERM
+    (screen-256color |  tmux-256color   |  xterm-256color  )
+        # Set the COLORTERM environment variable to 'truecolor' to advertise 24-bit color support
+        # COLORTERM 的选项:no|yes|truecolor
+        export COLORTERM=truecolor
+        ;;           # 一个分号能把2个命令串在一起,所以要2个分号
+    (*)              #  (*) :  a final pattern to define the default case  This pattern will always match? 不是啊, 就跟if else差不多
+        echo '$TERM='
+        echo $TERM
+        echo '---'
+        echo '$COLORTERM='
+        echo ${COLORTERM}
+        ;;
+esac
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -156,6 +188,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+conda activate cs20-caozh_base
+
+setopt no_nomatch
 
 # Note the source command must be at the end of .zshrc
 source "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

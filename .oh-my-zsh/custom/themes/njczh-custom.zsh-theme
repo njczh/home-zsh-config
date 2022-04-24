@@ -62,8 +62,8 @@ function conda_info() {
 function directory() {
     local color="%{$fg_no_bold[cyan]%}";
     # REF: https://stackoverflow.com/questions/25944006/bash-current-working-directory-with-replacing-path-to-home-folder
-    # local directory="${PWD/#$HOME/~}";
-    local directory="%/";
+    local directory="${PWD/#$HOME/~}";
+    # local directory="%/";
     local color_reset="%{$reset_color%}";
     echo "${color}${directory}${color_reset}";
 }
