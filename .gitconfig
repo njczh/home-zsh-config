@@ -1,3 +1,11 @@
 [user]
-	email = CaoZH20@fudan.edu.cn
 	name = njczh
+	email = 97njczh@gmail.com
+[core]
+	quotepath = false
+[gui]
+	encoding = utf-8
+[i18n "commit"]
+	encoding = utf-8
+[i18n]
+	logoutputencoding = utf-8
