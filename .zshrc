@@ -126,7 +126,7 @@ export PATH=$PATH:$CUDA_HOME/bin
 # For a full list of active aliases, run `alias`.
 #
 # EXAMPLE ALIASES
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig='vim ~/.zshrc'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 export hostip=10.177.45.171
@@ -155,6 +155,8 @@ alias -s gz='tar -xzvf'         # 在命令行直接输入后缀为 gz 的文件
 alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
+
+alias cman='man -M /usr/share/man/zh_CN'
 
 # 如果终端支持truecolor, 用之
 case $TERM in
@@ -188,7 +190,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-conda activate cs20-caozh_base
 
 setopt no_nomatch
 
