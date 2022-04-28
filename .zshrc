@@ -100,15 +100,22 @@ export PATH=$PATH:$HOME/.local/bin
 
 # CUDA CONFIGURATION
 #
-#export CUDA_HOME=/usr/local/cuda
+#export CUDA_HOME=/usr/local/cuda-10.0
 #export CUDA_HOME=/usr/local/cuda-11.3 
-export CUDA_HOME=/usr/local/cuda-10.0
+export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64
 export PATH=$PATH:$CUDA_HOME/bin
 
 # You may need to manually set your language environment
-#export LANG=en_US.UTF-8
-#export LANG=zh_CN.UTF-8
+# Chinese
+#export LANGUAGE="zh_CN.UTF-8:en_US.UTF-8"
+#export LC_ALL="zh_CN.UTF-8"
+#export LANG="zh_CN.UTF-8"
+#
+# English
+export LANGUAGE="en_US.UTF-8:zh_CN.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -139,8 +146,8 @@ alias ll='ls -alhF'
 alias la='ls -Ah'
 alias l='ls -hCF'
 #
-alias cp='/usr/local/bin/advcp -g'
-alias mv='/usr/local/bin/advmv -g'
+#alias cp='/usr/local/bin/advcp -g'
+#alias mv='/usr/local/bin/advmv -g'
 #
 alias cls='clear'
 #
@@ -192,6 +199,27 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 setopt no_nomatch
+
+## Check if ~/.pid_ssh_agent exists.
+#if [ -f ~/.pid_ssh_agent ]; then
+#
+#    source ~/.pid_ssh_agent
+#
+#    # Check process of ssh-agent still exists.
+#    TEST=$(ssh-add -l)
+#
+#    if [ -z "$TEST" ]; then # Reinit if not.
+#        NEED_INIT=1
+#    fi
+#else
+#    NEED_INIT=1 # PID file doesm't exist, reinit it.
+#fi
+#
+## Try start ssh-agent.
+#if [ ! -z "$NEED_INIT" ]; then
+#    echo $(ssh-agent -s) | sed -e 's/echo[ A-Za-z0-9]*;//g' > ~/.pid_ssh_agent # save the PID to file.
+#    source ~/.pid_ssh_agent
+#fi
 
 # Note the source command must be at the end of .zshrc
 source "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

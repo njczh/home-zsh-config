@@ -3,6 +3,10 @@
 !.oh-my-zsh/custom/themes/njczh-custom.zsh-theme
 !.zshrc
 !install.sh
+
+# ssh
+!.ssh/config
+
 # git 
 !.gitconfig
 !.gitignore
