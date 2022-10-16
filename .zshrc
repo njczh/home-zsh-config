@@ -95,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 #export LANG=en_US.UTF-8
-export LANG=zh_CN.UTF-8
+#export LANG=zh_CN.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -116,6 +116,21 @@ export LANG=zh_CN.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+if [[ -O /home/$USER/.tmp && -d /home/$USER/.tmp ]]; then
+        TMPDIR=/home/$USER/.tmp
+else
+        # You may wish to remove this line, it is there in case
+        # a user has put a file 'tmp' in there directory or a
+        rm -rf /home/$USER/.tmp 2> /dev/null
+        mkdir -p /home/$USER/.tmp
+        TMPDIR=$(mktemp -d /home/$USER/.tmp/XXXX)
+fi
+
+TMP=$TMPDIR
+TEMP=$TMPDIR
+
+export TMPDIR TMP TEMP
+
 export TERM=xterm-256color  # 使autosuggestions半透明
 
 export hostip=10.177.45.171
@@ -127,6 +142,9 @@ alias myip="curl myip.ipip.net"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias cp='/usr/local/bin/advcp -g'
+alias mv='/usr/local/bin/advmv -g'
 
 alias cls='clear'
 
@@ -144,18 +162,22 @@ alias -s bz2='tar -xjvf'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/caozh/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/caozh/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/caozh/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/opt/anaconda3/bin:$PATH"
+        export PATH="/home/caozh/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+setopt no_nomatch
+
 
 # Note the source command must be at the end of .zshrc
 source "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
