@@ -1,12 +1,12 @@
 *
 # zsh config & oh_my_zsh
-!.oh-my-zsh/custom/themes/njczh-custom.zsh-theme
+!.config/oh-my-zsh/custom/themes/njczh-custom.zsh-theme
 !.zshrc
 !install.sh
 
 # ssh
 !.ssh/config
 
-# git 
+# git
 !.gitconfig
 !.gitignore
